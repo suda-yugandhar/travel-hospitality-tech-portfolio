@@ -1,3 +1,117 @@
+       GUEST / APPLICATION
+               |
+               |
+        HTTP REQUEST
+               |
+               ▼
+        HOTEL API SERVER
+               |
+        Processes Request
+               |
+               ▼
+        HOTEL DATABASE
+               |
+        Retrieves Availability
+               |
+               ▼
+         HTTP RESPONSE
+               |
+               ▼
+       GUEST / APPLICATION
+
+
+       | Component | Meaning | Example |
+|---|---|---|
+| Method | What action you want to perform | GET |
+| URL | Where the request is going | `/api/v1/rooms` |
+| Headers | Additional information | `Content-Type: application/json` |
+| Body | Data being sent | Guest booking details |
+
+**HTTP Methods**
+| Method | Purpose | Hotel application example |
+|---|---|---|
+| GET | Retrieve information | Fetch available rooms |
+| POST | Create a resource or trigger an operation | Create a booking |
+| PUT | Replace an existing resource | Replace booking details |
+| PATCH | Partially update a resource | Change guest's checkout date |
+| DELETE | Delete a resource | Cancel/remove a booking |
+
+Practical examples
+Assume our hotel API is:
+
+https://api.example.com/v1
+
+A. GET – Retrieve information
+GET /v1/rooms
+
+Meaning: Retrieve the list of rooms.
+
+B. POST – Create information
+POST /v1/bookings
+
+Request body:
+{
+  "guest_name": "Yugandhar",
+  "room_type": "Deluxe",
+  "check_in": "2026-12-10",
+  "check_out": "2026-12-15"
+}
+
+Meaning: Create a new booking.
+
+C. PUT – Replace information
+PUT /v1/bookings/1024
+
+Request body:
+{
+  "guest_name": "Yugandhar",
+  "room_type": "Suite",
+  "check_in": "2026-12-10",
+  "check_out": "2026-12-15"
+}
+
+Meaning: Replace the existing booking representation with the supplied details.
+
+D. PATCH – Partially update information
+PATCH /v1/bookings/1024
+
+Request body:
+{
+  "room_type": "Suite"
+}
+
+Meaning: Update only the room type.
+
+E. DELETE – Remove information
+DELETE /v1/bookings/1024
+
+Meaning: Delete the booking resource, assuming the API supports this operation.
+
+Important distinction:
+- PUT generally replaces the resource representation.
+- PATCH applies partial modifications.
+- POST is commonly used to create resources.
+- DELETE does not necessarily mean physically erasing database records. Some systems use soft deletion or cancellation workflows.
+Bonus: Idempotency
+This is an important concept in travel-tech integrations.
+
+An operation is idempotent when repeating the same request has the same intended effect as performing it once.
+Method	Typically idempotent?
+GET	Yes
+POST	No, not by default
+PUT	Yes
+PATCH	Depends on implementation
+DELETE	Yes, in terms of intended final state
+
+
+Imagine a guest clicks Book Now, but the internet connection fails before the response arrives.
+
+The application retries the request.
+
+Without appropriate safeguards, the guest might receive two bookings.
+
+An Idempotency-Key can help prevent duplicate booking creation when supported by the API.
+
 **HTTPS STATUS CODES:**
 | Code | Meaning | Hotel API example |
 |---|---|---|
