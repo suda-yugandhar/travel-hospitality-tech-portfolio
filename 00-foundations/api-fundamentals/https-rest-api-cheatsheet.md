@@ -1,5 +1,4 @@
-**HTTPS STATUS CODES:
-**
+**HTTPS STATUS CODES:**
 | Code | Meaning | Hotel API example |
 |---|---|---|
 | 200 | OK | Room availability retrieved |
@@ -23,8 +22,7 @@
 | 504 | Gateway Timeout | Upstream service did not respond in time |
 
 
-**HTTPS STATUS CODES 4 MMAJOR CATEGORIES
-**
+**HTTPS STATUS CODES 4 MMAJOR CATEGORIES**
 | Category | Range | Meaning |
 |---|---|---|
 | 1xx | 100–199 | Informational |
@@ -34,8 +32,7 @@
 | 5xx | 500–599 | Server-side issues |
 
 
-**Product Manager insight:
-**
+**Product Manager insight:**
 Suppose a hotel's booking conversion suddenly drops.
 
 Your engineering team reports:
